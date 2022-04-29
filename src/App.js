@@ -9,20 +9,19 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import DisplayCount from './components/DisplayCount';
+import Counter from './components/Counter';
 
 function App() {
 
   const [count, setCount] = useState(0);
 
-  let handleClick = (e) => {
-    console.log(e.target)
-    if (e.target.dataset.calc === "reset") {
+  let updateCount = (value) => {
+    if (value === "reset") {
       setCount(0)
     } else {
-      setCount(count + parseInt(e.target.dataset.calc))
+      setCount(count + parseInt(value))
     }
-
-    console.log("button clicked", count)
   }
 
 
@@ -46,12 +45,9 @@ function App() {
         </div>
 
         <div>
-          <p>You have clicked {count} times</p>
-          <button data-calc="-5" onClick={handleClick}>-5</button>
-          <button data-calc="-1" onClick={handleClick}>-1</button>
-          <button data-calc="reset" onClick={handleClick}>Reset</button>
-          <button data-calc="1" onClick={handleClick}>+1</button>
-          <button data-calc="5" onClick={handleClick}>+5</button>
+          <DisplayCount count={count} />
+          <Counter updateCount={updateCount} />
+
         </div>
       </header>
     </div>
